@@ -59,7 +59,7 @@ app.get("/", async function(req, res) {
 
 });
 
-app.post("/", async function(req, res){
+app.post("/", async (req, res) => {
 
   const itemName = req.body.newItem;
   const listName = req.body.list;
@@ -116,10 +116,18 @@ app.get("/:listName", async (req, res) => {
 
 });
 
-app.get("/about", function(req, res){
+app.get("/about", (req, res) => {
   res.render("about");
 });
 
-app.listen(3000, function() {
-  console.log("Server started on port 3000");
+
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
+}
+app.listen(port);
+
+
+app.listen(port, () => {
+  console.log("Server started successfully");
 });
