@@ -5,15 +5,17 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _ = require("lodash");
 const date = require(__dirname + "/date.js");
+const fs = require("fs");
 
 const app = express();
+const key = fs.readFileSync("mongoDBkey.txt", "utf-8");
 
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://liqqianl:Lq19950714@cluster0.kvvk5qk.mongodb.net/todolistDB");
+mongoose.connect("mongodb+srv://liqqianl:"+ key + "@cluster0.kvvk5qk.mongodb.net/todolistDB");
 
 const itemsSchema = mongoose.Schema({
   name: String
